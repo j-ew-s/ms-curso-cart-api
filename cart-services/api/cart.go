@@ -11,7 +11,7 @@ func GetCart(ctx *fasthttp.RequestCtx) {
 }
 
 func RemoveFromCart(ctx *fasthttp.RequestCtx) {
-	fmt.Println("ClearCart")
+	fmt.Println("RemoveFromCart")
 
 }
 
@@ -21,6 +21,6 @@ func ClearCart(ctx *fasthttp.RequestCtx) {
 }
 
 func AddToCart(ctx *fasthttp.RequestCtx) {
-	fmt.Println("ClearCart")
+	fmt.Println("AddToCart")
 
 }
