@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/buaazp/fasthttprouter"
+	cartService "github.com/j-ew-s/ms-curso-cart-api/cart-services"
 	"github.com/valyala/fasthttp"
 )
 
 func main() {
 	router := fasthttprouter.New()
-	//cartService.
-	//.SetRoutes(router)
+	cartService.SetRoutes(router)
 	fasthttp.ListenAndServe(":5003", CORS(router.Handler))
 }
 
