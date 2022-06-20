@@ -11,7 +11,7 @@ import (
 func GetByUserId(userId string) (*user.User, error) {
 	var cc *grpc.ClientConn
 
-	cc, err := grpc.Dial(":5100", grpc.WithInsecure())
+	cc, err := grpc.Dial(":5500", grpc.WithInsecure())
 
 	if err != nil {
 		fmt.Println(fmt.Sprintf("GetByUserId gRPC DIAL falhou: %v", err))
@@ -37,11 +37,12 @@ func GetByUserId(userId string) (*user.User, error) {
 
 func IsTokenValid(token string) (*user.TokenValidation, error) {
 	var cc *grpc.ClientConn
+	connection := ":5500"
 
-	cc, err := grpc.Dial(":5001", grpc.WithInsecure())
+	cc, err := grpc.Dial(connection, grpc.WithInsecure())
 
 	if err != nil {
-		fmt.Println(fmt.Sprintf("IsTokenValid : gRPC DIAL falhou: %v", err))
+		fmt.Println(fmt.Sprintf("IsTokenValid : gRPC DIAL falhou: %+v - PORT %s", err, connection))
 		return nil, err
 	}
 
@@ -55,7 +56,7 @@ func IsTokenValid(token string) (*user.TokenValidation, error) {
 	response, err := u.IsTokenValid(context.Background(), &message)
 
 	if err != nil {
-		fmt.Println(fmt.Sprintf("Erro na chamaga do IsTokenValid : %v", err))
+		fmt.Println(fmt.Sprintf("Erro na chamaga do IsTokenValid : %+v  -- Token : %+v", err, &message))
 		return nil, err
 	}
 

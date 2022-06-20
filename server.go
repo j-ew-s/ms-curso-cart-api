@@ -9,7 +9,7 @@ import (
 func main() {
 	router := fasthttprouter.New()
 	cartService.SetRoutes(router)
-	fasthttp.ListenAndServe(":5003", CORS(router.Handler))
+	fasthttp.ListenAndServe(":5300", CORS(router.Handler))
 }
 
 var (

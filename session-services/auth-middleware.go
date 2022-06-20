@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	userGRPC "github.com/j-ew-s/ms-curso-catalog-api/user-services/grpc"
+	userGRPC "github.com/j-ew-s/ms-curso-cart-api/user-services/grpc"
 	"github.com/valyala/fasthttp"
 
 	common "github.com/j-ew-s/ms-curso-cart-api/common"
