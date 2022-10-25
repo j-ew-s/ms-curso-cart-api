@@ -1,0 +1,14 @@
+version : '3'
+services:
+  cache:
+    container_name : cart_api_db
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    entrypoint: redis-server --appendonly yes --requirepass password --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes: 
+      - cache:/data
+volumes:
+  cache:
+    driver: local

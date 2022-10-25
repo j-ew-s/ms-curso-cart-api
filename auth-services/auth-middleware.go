@@ -1,4 +1,4 @@
-package sessionServices
+package authServices
 
 import (
 	"errors"
@@ -8,16 +8,17 @@ import (
 	"github.com/valyala/fasthttp"
 
 	common "github.com/j-ew-s/ms-curso-cart-api/common"
+	sessionModels "github.com/j-ew-s/ms-curso-cart-api/session-services/models"
 )
 
-var GlobalSession *Session
+var GlobalSession *sessionModels.Session
 
 func CheckForLogingAndSetSession(requestHandler fasthttp.RequestHandler) fasthttp.RequestHandler {
 	return func(ctx *fasthttp.RequestCtx) {
 		token := string(ctx.Request.Header.Peek("Authorization"))
 
 		if token != "" {
-			GlobalSession = &Session{Token: token}
+			GlobalSession = &sessionModels.Session{Token: token}
 			err := Authorization()
 			if err != nil {
 				common.PrepareResponse(ctx, 500, "Error")
@@ -34,7 +35,7 @@ func AuthSessionValidator(requestHandler fasthttp.RequestHandler) fasthttp.Reque
 		token := string(ctx.Request.Header.Peek("Authorization"))
 
 		if token != "" {
-			GlobalSession = &Session{Token: token}
+			GlobalSession = &sessionModels.Session{Token: token}
 
 			err := Authorization()
 			if err != nil {

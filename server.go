@@ -2,13 +2,17 @@ package main
 
 import (
 	"github.com/buaazp/fasthttprouter"
+	"github.com/go-redis/redis"
 	cartService "github.com/j-ew-s/ms-curso-cart-api/cart-services"
+	"github.com/j-ew-s/ms-curso-cart-api/database"
 	"github.com/valyala/fasthttp"
 )
 
 func main() {
 	router := fasthttprouter.New()
-	cartService.SetRoutes(router)
+	db := SetDataBase()
+	client := cartService.SetCartSetvice(db)
+	cartService.SetRoutes(router, client)
 	fasthttp.ListenAndServe(":5300", CORS(router.Handler))
 }
 
@@ -29,4 +33,10 @@ func CORS(next fasthttp.RequestHandler) fasthttp.RequestHandler {
 
 		next(ctx)
 	}
+}
+
+func SetDataBase() *redis.Client {
+
+	return database.SetupRedis()
+
 }

@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/j-ew-s/ms-curso-auth-grpc/auth"
+	authGrpc "github.com/j-ew-s/ms-curso-auth-grpc/auth"
 	"google.golang.org/grpc"
 )
 
-func IsTokenValid(token string) (*auth.TokenValidation, error) {
+func IsTokenValid(token string) (*authGrpc.TokenValidation, error) {
 	var cc *grpc.ClientConn
 	connection := ":5500"
 
@@ -20,9 +20,9 @@ func IsTokenValid(token string) (*auth.TokenValidation, error) {
 	}
 
 	defer cc.Close()
-	u := auth.NewUserServiceClient(cc)
+	u := authGrpc.NewUserServiceClient(cc)
 
-	message := auth.Token{
+	message := authGrpc.Token{
 		Token: token,
 	}
 
